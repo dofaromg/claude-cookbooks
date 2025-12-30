@@ -1,6 +1,6 @@
 # Claude Cookbooks
 
-A collection of Jupyter notebooks and Python examples for building with the Claude API. These cookbooks provide copy-able code snippets and patterns that developers can integrate into their projects.
+A collection of Jupyter notebooks and Python examples for building with the Claude API. These cookbooks provide copyable code snippets and patterns that developers can integrate into their projects.
 
 ## Quick Start
 
