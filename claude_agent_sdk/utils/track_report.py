@@ -41,7 +41,7 @@ def track_report(tool_name, tool_input, tool_response, audit_dir=None):
     try:
         # Load existing history or create new
         if os.path.exists(history_file):
-            with open(history_file) as f:
+            with open(history_file, encoding='utf-8') as f:
                 history = json.load(f)
         else:
             history = {"reports": []}
@@ -71,7 +71,7 @@ def track_report(tool_name, tool_input, tool_response, audit_dir=None):
 
         # Save updated history
         os.makedirs(os.path.dirname(history_file), exist_ok=True)
-        with open(history_file, "w") as f:
+        with open(history_file, "w", encoding='utf-8') as f:
             json.dump(history, f, indent=2)
 
         print(f"📊 File tracked: {os.path.basename(file_path)} ({action})")
