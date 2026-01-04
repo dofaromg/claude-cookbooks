@@ -1,6 +1,6 @@
 import crypto from 'crypto';
 import { FlowEvent, FlowContext, MerkleLink } from '../../types';
-import { hashPayload } from '../../utils';
+import { hashPayload, now } from '../../utils';
 
 export class MerkleChain {
   private links: MerkleLink[] = [];
@@ -9,7 +9,7 @@ export class MerkleChain {
     const parent = this.links.length ? this.links[this.links.length - 1].hash : undefined;
     const payload = { event, context, parent };
     const hash = crypto.createHash('sha256').update(JSON.stringify(payload)).digest('hex');
-    const link: MerkleLink = { hash, parent, context, event, createdAt: Date.now() };
+    const link: MerkleLink = { hash, parent, context, event, createdAt: now() };
     this.links.push(link);
     return link;
   }

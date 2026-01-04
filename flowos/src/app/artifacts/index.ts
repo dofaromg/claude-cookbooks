@@ -1,11 +1,11 @@
-import { ArtifactRecord, ArtifactVersion } from '../../types';
+import { ArtifactRecord, ArtifactVersion, UUID } from '../../types';
 import { MemoryStorage } from '../../storage';
 import { now, randomId } from '../../utils';
 
 export class ArtifactVault {
   constructor(private readonly storage: MemoryStorage) {}
 
-  registerArtifact(project: string, name: string, description?: string): ArtifactRecord {
+  registerArtifact(project: UUID, name: string, description?: string): ArtifactRecord {
     const record: ArtifactRecord = {
       id: randomId(),
       project,
