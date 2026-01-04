@@ -17,6 +17,7 @@ eggs/
 .eggs/
 lib/
 lib64/
+!flowos/**/lib/
 parts/
 sdist/
 var/
@@ -155,3 +156,5 @@ validation_report_*.md
 tool_use/demo_memory/
 tool_use/memory_storage/
 tool_use/.env
+flowos/dist/
+node_modules/
