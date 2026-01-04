@@ -1,0 +1,15 @@
+{
+  "name": "claude-cookbooks",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Claude Cookbooks with FlowOS TypeScript SDK",
+  "scripts": {
+    "build": "cd flowos && npm run build",
+    "test": "cd flowos && npm run test",
+    "typecheck": "cd flowos && npm run typecheck"
+  },
+  "devDependencies": {
+    "@types/node": "^25.0.3",
+    "typescript": "^5.9.3"
+  }
+}
