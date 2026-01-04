@@ -158,3 +158,5 @@ tool_use/.env
 
 # FlowOS build artifacts
 flowos/dist/
+flowos/node_modules/
+flowos/package-lock.json
