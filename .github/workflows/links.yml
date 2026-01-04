@@ -25,6 +25,9 @@ jobs:
         env:
           BASE_REF: ${{ github.base_ref }}
         run: |
+          # Ensure base branch is fetched
+          git fetch origin "$BASE_REF:refs/remotes/origin/$BASE_REF" || true
+
           # Get list of changed files
           CHANGED_FILES=$(git diff --name-only "origin/$BASE_REF"...HEAD | grep -E '\.(md|ipynb)$' || true)
           echo "Changed files:"
