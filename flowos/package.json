@@ -7,7 +7,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "test": "node --experimental-modules --no-warnings dist/test.js",
+    "test": "node dist/test.js",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   }
 }
