@@ -15,7 +15,7 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
+/lib/
 lib64/
 parts/
 sdist/
@@ -155,3 +155,10 @@ validation_report_*.md
 tool_use/demo_memory/
 tool_use/memory_storage/
 tool_use/.env
+
+# Node.js / TypeScript
+node_modules/
+flowos/dist/
+flowos/node_modules/
+*.log
+package-lock.json
