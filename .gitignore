@@ -155,3 +155,6 @@ validation_report_*.md
 tool_use/demo_memory/
 tool_use/memory_storage/
 tool_use/.env
+
+# FlowOS build artifacts
+flowos/dist/

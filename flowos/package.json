@@ -1,0 +1,13 @@
+{
+  "name": "flowos",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Lightweight FlowOS runtime skeleton with core FlowAgent building blocks.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "node --experimental-modules --no-warnings dist/test.js",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  }
+}
