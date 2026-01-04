@@ -38,9 +38,9 @@ def print_final_result(messages):
 
     # Print cost and duration if result message
     if isinstance(result_msg, ResultMessage):
-        if result_msg.total_cost_usd:
+        if result_msg.total_cost_usd is not None:
             print(f"\n📊 Cost: ${result_msg.total_cost_usd:.2f}")
-        if result_msg.duration_ms:
+        if result_msg.duration_ms is not None:
             print(f"⏱️  Duration: {result_msg.duration_ms / 1000:.2f}s")
 
 
@@ -53,8 +53,9 @@ def visualize_conversation(messages):
     for i, msg in enumerate(messages):
         if isinstance(msg, SystemMessage):
             print("⚙️  System Initialized")
-            if hasattr(msg, "data") and "session_id" in msg.data:
-                print(f"   Session: {msg.data['session_id'][:8]}...")
+            session_data = getattr(msg, "data", None)
+            if isinstance(session_data, dict) and "session_id" in session_data:
+                print(f"   Session: {session_data['session_id'][:8]}...")
             print()
 
         elif isinstance(msg, AssistantMessage):
@@ -102,13 +103,13 @@ def visualize_conversation(messages):
 
         elif isinstance(msg, ResultMessage):
             print("✅ Conversation Complete")
-            if msg.num_turns:
+            if msg.num_turns is not None:
                 print(f"   Turns: {msg.num_turns}")
-            if msg.total_cost_usd:
+            if msg.total_cost_usd is not None:
                 print(f"   Cost: ${msg.total_cost_usd:.2f}")
-            if msg.duration_ms:
+            if msg.duration_ms is not None:
                 print(f"   Duration: {msg.duration_ms / 1000:.2f}s")
-            if msg.usage:
+            if msg.usage is not None:
                 usage = msg.usage
                 total_tokens = usage.get("input_tokens", 0) + usage.get("output_tokens", 0)
                 print(f"   Tokens: {total_tokens:,}")
