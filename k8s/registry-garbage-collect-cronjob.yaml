@@ -23,7 +23,7 @@ spec:
           restartPolicy: OnFailure
           containers:
             - name: garbage-collect
-              image: registry:2
+              image: registry:2.8.3
               command:
                 - /bin/sh
                 - -c
