@@ -1,10 +1,99 @@
 # yaml-language-server: $schema=./.github/registry_schema.json
-- title: Giving Claude a crop tool for better image analysis
-  description: Give Claude a crop tool to zoom into image regions for detailed analysis
-    of charts, documents, and diagrams.
+- title: Build a data analyst agent with Claude Managed Agents
+  description: Build an analyst that turns a CSV into a narrative HTML report with
+    interactive charts, using a sandboxed environment and file mounting.
+  path: managed_agents/data_analyst_agent.ipynb
+  authors:
+  - charmaine
+  - jyan-anthropic
+  date: '2026-04-08'
+  categories:
+  - Claude Managed Agents
+  - Tools
+- title: Build a Slack data analyst bot with Claude Managed Agents
+  description: Mention the bot with a CSV to get an analysis report in-thread, with
+    multi-turn follow-ups on the same session.
+  path: managed_agents/slack_data_bot.ipynb
+  authors:
+  - charmaine
+  date: '2026-04-08'
+  categories:
+  - Claude Managed Agents
+  - Integrations
+- title: 'Managed Agents tutorial: iterate on a failing test suite'
+  description: Entry-point tutorial for the Claude Managed Agents API. Walks through
+    agent / environment / session creation, file mounts, and the streaming event
+    loop by getting an agent to fix three planted bugs in a calc.py package.
+  path: managed_agents/CMA_iterate_fix_failing_tests.ipynb
+  authors:
+  - pauly-ant
+  date: '2026-04-08'
+  categories:
+  - Claude Managed Agents
+  - Tools
+- title: 'Managed Agents tutorial: production setup'
+  description: End-to-end production story for Managed Agents — vault-backed MCP
+    credentials, the session.status_idled webhook pattern for human-in-the-loop
+    without long-lived connections, and the resource lifecycle CRUD verbs.
+  path: managed_agents/CMA_operate_in_production.ipynb
+  authors:
+  - pauly-ant
+  date: '2026-04-08'
+  categories:
+  - Claude Managed Agents
+  - Integrations
+- title: Build an SRE incident response agent with Claude Managed Agents
+  description: 'Wire Claude into your on-call flow: when an alert fires, the agent
+    reads logs and runbooks, pinpoints the root cause, opens a fix PR, and waits
+    for your approval before merging.'
+  path: managed_agents/sre_incident_responder.ipynb
+  authors:
+  - gaganb-ant
+  date: '2026-04-10'
+  categories:
+  - Claude Managed Agents
+  - Observability
+- title: 'Managed Agents tutorial: prompt versioning and rollback'
+  description: Server-side prompt versioning — create v1, evaluate against a labelled
+    test set, ship v2, detect a regression, roll back by pinning sessions to version
+    1. Covers agents.update, version pinning on sessions.create, and where the review
+    gate moves when prompts are not code.
+  path: managed_agents/CMA_prompt_versioning_and_rollback.ipynb
+  authors:
+  - markn-ant
+  date: '2026-04-07'
+  categories:
+  - Claude Managed Agents
+  - Evals
+- title: Threat intelligence enrichment agent
+  description: Build an agent that autonomously investigates IOCs by querying multiple
+    threat intel sources, cross-referencing findings, mapping to MITRE ATT&CK, and
+    producing structured reports for SIEM and SOAR integration.
+  path: tool_use/threat_intel_enrichment_agent.ipynb
+  authors:
+  - jannet-park
+  date: '2026-04-07'
+  categories:
+  - Tools
+  - Agent Patterns
+  - Cybersecurity
+- title: Knowledge graph construction with Claude
+  description: Build knowledge graphs from unstructured text using Claude for entity
+    extraction, relation mining, deduplication, and multi-hop graph querying.
+  path: capabilities/knowledge_graph/guide.ipynb
+  authors:
+  - Anthropic
+  date: '2026-03-23'
+  categories:
+  - RAG & Retrieval
+  - Tools
+- title: Giving Claude a zoom tool for reading fine image detail
+  description: Give Claude a zoom tool that crops a region and magnifies it for detailed
+    analysis of charts, documents, and diagrams.
   path: multimodal/crop_tool.ipynb
   authors:
   - nadine-anthropic
+  - bradabrams
   date: '2025-11-22'
   categories:
   - Multimodal
@@ -44,6 +133,16 @@
   authors:
   - PedramNavid
   date: '2025-11-24'
+  categories:
+  - Tools
+  - Agent Patterns
+- title: 'Context engineering: memory, compaction, and tool clearing'
+  description: Compare context engineering strategies for long-running agents and
+    learn when each applies, what it costs, and how they compose.
+  path: tool_use/context_engineering/context_engineering_tools.ipynb
+  authors:
+  - isabella-anthropic
+  date: '2026-03-20'
   categories:
   - Tools
   - Agent Patterns
@@ -117,6 +216,7 @@
     research.
   path: claude_agent_sdk/00_The_one_liner_research_agent.ipynb
   authors:
+  - rodrigo-olivares
   - JiriDeJonghe
   date: '2025-09-12'
   categories:
@@ -127,6 +227,7 @@
     plan mode features.
   path: claude_agent_sdk/01_The_chief_of_staff_agent.ipynb
   authors:
+  - rodrigo-olivares
   - JiriDeJonghe
   date: '2025-09-12'
   categories:
@@ -137,8 +238,63 @@
     and CI workflows.
   path: claude_agent_sdk/02_The_observability_agent.ipynb
   authors:
+  - rodrigo-olivares
   - JiriDeJonghe
   date: '2025-09-12'
+  categories:
+  - Claude Agent SDK
+  - Agent Patterns
+- title: The site reliability agent
+  description: Build an incident response agent with read-write MCP tools for autonomous
+    diagnosis, remediation, and post-mortem documentation.
+  path: claude_agent_sdk/03_The_site_reliability_agent.ipynb
+  authors:
+  - benlehrburger-ant
+  - isabella-anthropic
+  date: '2026-02-16'
+  categories:
+  - Claude Agent SDK
+  - Agent Patterns
+- title: Migrating from the OpenAI Agents SDK
+  description: Port an OpenAI Agents SDK app to the Claude Agent SDK, mapping each
+    primitive (tools, guardrails, sessions, handoffs) through a single expense-approval
+    agent example.
+  path: claude_agent_sdk/04_migrating_from_openai_agents_sdk.ipynb
+  authors:
+  - preston-tuggle
+  date: '2026-03-09'
+  categories:
+  - Claude Agent SDK
+  - Agent Patterns
+- title: Building a session browser
+  description: List, read, rename, tag, and fork Agent SDK sessions on disk to build
+    a conversation history sidebar without writing a transcript parser.
+  path: claude_agent_sdk/05_Building_a_session_browser.ipynb
+  authors:
+  - qing-ant
+  date: '2026-03-30'
+  categories:
+  - Claude Agent SDK
+  - Agent Patterns
+- title: Hosting your agent
+  description: Deploy the research agent from notebook 00 through three tiers of operational
+    maturity (Docker, Modal, Kubernetes) with the same container image and HTTP interface
+    at every tier.
+  path: claude_agent_sdk/07_Hosting_the_agent.ipynb
+  authors:
+  - kevintang513
+  - anav-ant
+  date: '2026-05-22'
+  categories:
+  - Claude Agent SDK
+- title: Orchestrate subagents at scale with dynamic workflows
+  description: Trigger a dynamic workflow from the Agent SDK to fact-check a report
+    against source documents with parallel verifier and skeptic subagents.
+  path: claude_agent_sdk/08_Dynamic_workflows.ipynb
+  authors:
+  - preston-tuggle
+  - jimmyechan-ant
+  date: '2026-07-22'
   categories:
   - Claude Agent SDK
   - Agent Patterns
@@ -250,6 +406,16 @@
   - alexalbertt
   date: '2024-08-14'
   categories:
+  - Responses
+- title: Session memory compaction
+  description: Manage long-running Claude conversations with instant session memory
+    compaction using background threading and prompt caching.
+  path: misc/session_memory_compaction.ipynb
+  authors:
+  - jsham042
+  date: '2026-01-16'
+  categories:
+  - Agent Patterns
   - Responses
 - title: Summarizing web page content with Claude 3 Haiku
   description: Fetch and summarize web page content using Claude 3 Haiku via URL extraction.
@@ -366,6 +532,16 @@
   authors:
   - Anthropic
   date: '2024-12-19'
+  categories:
+  - Agent Patterns
+- title: Async multi-agent orchestration
+  description: Two async multi-agent patterns — a fixed N-agent team with peer messaging
+    through a shared hub, and dynamically spawned async subagents — reduced to their
+    bare messaging and lifecycle mechanics.
+  path: patterns/agents/async_multi_agent_orchestration.ipynb
+  authors:
+  - paulchen-go
+  date: '2026-06-08'
   categories:
   - Agent Patterns
 - title: Introduction to Claude Skills
@@ -556,7 +732,7 @@
   categories:
   - Responses
   - Tools
-- title: Memory & context management with Claude Sonnet 4.5
+- title: Memory & context management with Claude Sonnet 4.6
   description: Build AI agents with persistent memory using Claude's memory tool and
     context editing.
   path: tool_use/memory_cookbook.ipynb
@@ -602,4 +778,112 @@
   date: '2024-05-15'
   categories:
   - Multimodal
+  - Tools
+- title: Build agents that remember your users
+  description: Give your Claude Managed Agents a Memory store so they learn and
+    remember your users' preferences across multiple interactions.
+  path: managed_agents/CMA_remember_user_preferences.ipynb
+  authors:
+  - gaganb-ant
+  date: '2026-04-24'
+  categories:
+  - Claude Managed Agents
+  - Tools
+- title: The vulnerability detection agent
+  description: Build a vulnerability-discovery agent with the Claude Agent SDK
+    that threat-models a C target, hunts memory-safety bugs with built-in file
+    tools, and triages findings into a structured report.
+  path: claude_agent_sdk/06_The_vulnerability_detection_agent.ipynb
+  authors:
+  - eugeneyan-ant
+  date: '2026-04-22'
+  categories:
+  - Claude Agent SDK
+  - Cybersecurity
+- title: 'Multiagent: coordinate a specialist team'
+  description: Heterogeneous team via the multiagent coordinator config — a coordinator
+    runs three specialists (web-search researcher, file-reading librarian, rules-based
+    pricer) with scoped toolsets to assemble a sales proposal. Covers the multiagent
+    field, the thread_created / thread_message_received event types, and per-role
+    tool scoping.
+  path: managed_agents/CMA_coordinate_specialist_team.ipynb
+  authors:
+  - markn-ant
+  date: '2026-05-03'
+  categories:
+  - Claude Managed Agents
+  - Tools
+- title: 'Coordinator pattern: big models for planning, small models for execution'
+  description: Two-model team economics via the multiagent coordinator config — a
+    frontier coordinator plans and synthesizes while cheap search workers do the
+    token-heavy web reading in parallel threads, compared against a rigor-matched
+    solo-frontier control with real bills. Covers per-thread usage metering and
+    cost attribution.
+  path: managed_agents/CMA_plan_big_execute_small.ipynb
+  authors:
+  - bradabrams
+  date: '2026-07-02'
+  categories:
+  - Claude Managed Agents
+- title: 'Outcomes: agents that verify their own work'
+  description: 'Build a grade-and-revise loop with Outcomes: a writer drafts a cited
+    research brief, a stateless grader fetches every URL and checks every quote against
+    a rubric, and feedback drives revisions until the brief passes. Covers user.define_outcome,
+    the span.outcome_evaluation_* events, and how to write a rubric the grader can
+    act on.'
+  path: managed_agents/CMA_verify_with_outcome_grader.ipynb
+  authors:
+  - markn-ant
+  - gaganb-ant
+  date: '2026-05-03'
+  categories:
+  - Claude Managed Agents
+  - Evals
+- title: 'Multiagent: watch a curriculum team work in real time'
+  description: Stream a coordinator and its subagents live with per-thread event deltas,
+    seed the session with initial_events, set model effort per agent, and update agents
+    without the version round trip.
+  path: managed_agents/CMA_watch_subagents_live.ipynb
+  authors:
+  - cj-ant
+  date: '2026-07-15'
+  categories:
+  - Claude Managed Agents
+  - Observability
+- title: Classifier fallback and billing for Claude Fable 5
+  description: Detect safety classifier blocks on Fable 5 and fall back to Opus 4.8
+    with server-side or SDK-based client-side fallback, including streaming behavior
+    and the new billing changes.
+  path: fable_5_fallback_billing/guide.ipynb
+  authors:
+  - Briiick
+  - maheshmurag
+  - mikaelagrace
+  date: '2026-06-09'
+  categories:
+  - Responses
+- title: Reproduce Claude's agentic search benchmark scores in the Messages API
+  description: Build a Messages API harness that reproduces published DeepSearchQA
+    and BrowseComp scores, using programmatic tool calling, server-side compaction,
+    and task budgets.
+  path: evals/agentic_search/reproduce_agentic_search_benchmarks.ipynb
+  authors:
+  - mengtingli-ant
+  date: '2026-06-25'
+  categories:
+  - Evals
+- title: Fraud Review Agent with MongoDB Atlas and Claude Managed Agents
+  description: Bring MongoDB Atlas to a Claude Managed Agent as its retrieval engine, graph
+    store, and system of record — three credential-safe ways to connect, the four retrieval
+    patterns (vector, full-text, reciprocal rank fusion, $graphLookup) as liftable building
+    blocks, and a human-in-the-loop fraud-review agent that records decisions and an
+    append-only audit trail in the same cluster.
+  path: managed_agents/CMA_with_mongodb_atlas.ipynb
+  authors:
+  - mohammaddaoudfarooqi
+  date: '2026-06-22'
+  categories:
+  - Claude Managed Agents
+  - RAG & Retrieval
+  - Integrations
   - Tools

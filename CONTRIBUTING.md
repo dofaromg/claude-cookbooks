@@ -118,7 +118,7 @@ If a hook fails, fix the issues and try committing again.
 
 2. **Use current Claude models**:
    - Use model aliases for better maintainability when available
-   - Latest Haiku model: `claude-haiku-4-5-20251001` (Haiku 4.5)
+   - Latest Haiku model: `claude-haiku-4-5` (Haiku 4.5)
    - Check current models at: https://docs.claude.com/en/docs/about-claude/models/overview
    - Claude will automatically validate model usage in PR reviews
 
@@ -224,8 +224,7 @@ External contributors will have limited API testing to conserve resources.
 
 ## Getting Help
 
-- **Issues**: [GitHub Issues](https://github.com/anthropics/anthropic-cookbook/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/anthropics/anthropic-cookbook/discussions)
+- **Issues**: [GitHub Issues](https://github.com/anthropics/claude-cookbooks/issues)
 - **Discord**: [Anthropic Discord](https://www.anthropic.com/discord)
 
 ## Security

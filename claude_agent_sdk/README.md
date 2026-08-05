@@ -23,7 +23,7 @@ A tutorial series demonstrating how to build sophisticated general-purpose agent
 ```uv run python -m ipykernel install --user --name="cc-sdk-tutorial" --display-name "Python (cc-sdk-tutorial)" ```
 
 #### 4. Claude API Key
-1. Visit [console.anthropic.com](https://console.anthropic.com/dashboard)
+1. Visit [platform.claude.ai](https://platform.claude.ai/dashboard)
 2. Sign up or log in to your account
 3. Click on "Get API keys"
 4. Copy the key and paste it into your `.env` file as ```ANTHROPIC_API_KEY=```
@@ -87,12 +87,74 @@ Expand beyond local capabilities by connecting agents to external systems throug
 - **Intelligent Incident Response:** Automated root cause analysis
 - **Production Workflow Automation:** From monitoring to actionable insights
 
+### [Notebook 03: The Site Reliability Agent](03_The_site_reliability_agent.ipynb)
+
+Move from read-only observation to read-write remediation. Build an SRE incident response agent that can investigate production incidents, diagnose root causes, apply fixes, and document the results — all autonomously.
+
+**Key Capabilities:**
+- **MCP Tool Server:** 12+ tools for metrics, infrastructure, diagnostics, and documentation via JSON-RPC subprocess
+- **Prometheus Integration:** PromQL queries for error rates, latency, and DB connection monitoring
+- **Read-Write Remediation:** Edit configuration files, restart Docker services, and verify fixes
+- **Safety Hooks:** PreToolUse hooks that validate write operations (pool size ranges, config sanity checks)
+- **End-to-End Incident Lifecycle:** From detection through remediation to post-mortem documentation
+- **Production Extensions:** Optional PagerDuty and Confluence integrations via conditional MCP tool registration
+
+### [Notebook 04: Migrating from the OpenAI Agents SDK](04_migrating_from_openai_agents_sdk.ipynb)
+
+Port an existing OpenAI Agents SDK application to the Claude Agent SDK, mapping each primitive across a single expense-approval agent example while both SDKs run live.
+
+**Key Concepts:**
+- **Primitive Mapping:** `@function_tool`, guardrails, and `Runner.run` to their Claude equivalents
+- **Single-Agent Port:** Custom tools, input/output guardrails, multi-turn sessions, and durable resume
+- **Client vs. `query()`:** When to use the stateful `ClaudeSDKClient` versus stateless `query()`
+- **Observability:** Wiring the SDK's OpenTelemetry export into an existing stack
+
+### [Notebook 05: Building a Session Browser](05_Building_a_session_browser.ipynb)
+
+Build the conversation-history sidebar users expect from an agent product, reading the SDK's on-disk session transcripts instead of writing a parser.
+
+**Key Concepts:**
+- **Listing Sessions:** Paginated session lists with branch, title, and last-modified metadata
+- **Reading Transcripts:** Replay a stored session's messages without spawning the agent
+- **Organizing History:** Rename, tag, and filter sessions
+- **Forking:** Branch a session at any point and resume the fork as a live `query()` call
+
+### [Notebook 06: The Vulnerability Detection Agent](06_The_vulnerability_detection_agent.ipynb)
+
+Build a vulnerability-discovery agent that threat-models a C target, hunts memory-safety bugs with built-in file tools, and triages findings into a report a reviewer can act on.
+
+**Key Concepts:**
+- **Threat Modeling:** A bootstrap-then-interview `ClaudeSDKClient` session that writes `THREAT_MODEL.md`
+- **Agentic Find Loop:** Built-in `Read`/`Grep`/`Glob` tools instead of hand-rolled file access
+- **Chained Stages:** Separate find, triage, and report `query()` calls emitting schema-conformant JSON
+
+### [Notebook 07: Hosting Your Agent](07_Hosting_the_agent.ipynb)
+
+Deploy the research agent from notebook 00 through three tiers of operational maturity with the same container image and HTTP interface at every tier.
+
+**Key Concepts:**
+- **Docker:** Local and single-VM hosting for the dev loop and internal tools
+- **Modal:** Managed serverless with a URL and scale-to-zero
+- **Kubernetes:** Multi-tenant deployment in your own cluster
+- **Portable Interface:** Identical agent code, image, and HTTP surface across all three tiers
+
+### [Notebook 08: Orchestrate Subagents at Scale with Dynamic Workflows](08_Dynamic_workflows.ipynb)
+
+Scale beyond what one context window can coordinate. Trigger dynamic workflows from the Agent SDK: Claude writes a JavaScript orchestration script for your task, and a runtime executes it across a fleet of parallel subagents in the background.
+
+**Key Concepts:**
+- **Subagents vs. Workflows:** Who holds the plan: the model's context or a deterministic script
+- **Triggering Workflows from the SDK:** The `Workflow` tool, `allowed_tools`, and streaming run progress
+- **Fan-Out + Adversarial Verification:** One verifier per claim in parallel, each challenged by a skeptic agent before its verdict counts
+- **Reading Generated Scripts:** `agent()`, `parallel()`, `pipeline()`, phases, and structured output schemas
+
 ## Complete Agent Implementations
 
 Each notebook includes an agent implementation in its respective directory:
 - **`research_agent/`** - Autonomous research agent with web search and multimodal analysis
 - **`chief_of_staff_agent/`** - Multi-agent executive assistant with financial modeling and compliance
 - **`observability_agent/`** - DevOps monitoring agent with GitHub integration
+- **`site_reliability_agent/`** - SRE incident response agent with Prometheus, Docker, and MCP tool server
 
 **Running standalone agents:** To import agent modules outside of notebooks, either run from the `claude_agent_sdk/` directory or install the package in editable mode:
 ```bash

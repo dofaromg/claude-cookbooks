@@ -135,6 +135,8 @@ dmypy.json
 
 # Data
 *transactions*.jsonl
+# Cookbook example-data fixture is intentionally checked in (see example_data/OVERVIEW.md)
+!managed_agents/example_data/mongodb_on_cma/seed_transactions.jsonl
 /examples/data/transactions*
 *.DS_Store
 tmp_*
@@ -147,6 +149,9 @@ test_outputs/
 lychee-report.md
 .lycheecache
 
+# Skill validation temp directories
+.claude/skills/*/tmp/
+
 # Notebook validation
 .notebook_validation_state.json
 .notebook_validation_checkpoint.json  
@@ -155,3 +160,6 @@ validation_report_*.md
 tool_use/demo_memory/
 tool_use/memory_storage/
 tool_use/.env
+
+# Cybersecurity notebook artifacts (regenerated each run)
+claude_agent_sdk/vulnerability_detection_agent/canary/THREAT_MODEL.md
