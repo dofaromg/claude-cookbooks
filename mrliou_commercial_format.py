@@ -231,7 +231,15 @@ def pack_commercial_package(
     # 2. Validate manifest immutable signatures
     validate_metadata(manifest)
 
-    # 3. Write ZIP container
+    # 3. Check for reserved filenames before writing to avoid partially written ZIP files
+    for rel_path in file_contents:
+        if rel_path in ("manifest.json", "meta.json"):
+            raise ComplianceError(
+                f"Conflicting reserved file '{rel_path}' found in file_contents. "
+                "The manifest is automatically managed and should not be included in file_contents."
+            )
+
+    # 4. Write ZIP container
     output_path = Path(output_filename)
     with zipfile.ZipFile(output_path, "w", zipfile.ZIP_DEFLATED) as zipf:
         # Write manifest.json
@@ -240,11 +248,6 @@ def pack_commercial_package(
 
         # Write each other file
         for rel_path, content in file_contents.items():
-            if rel_path in ("manifest.json", "meta.json"):
-                raise ComplianceError(
-                    f"Conflicting reserved file '{rel_path}' found in file_contents. "
-                    "The manifest is automatically managed and should not be included in file_contents."
-                )
             if isinstance(content, str):
                 zipf.writestr(rel_path, content.encode("utf-8"))
             else:
@@ -313,10 +316,20 @@ def unpack_commercial_package(
         # Validate manifest
         validate_metadata(manifest)
 
-        # Unpack all files cleanly (Lossless restoration)
+        # Unpack all files cleanly (Lossless restoration) and verify sizes
         for name in namelist:
             zipf.extract(name, dest_path)
             extracted_files.append(name)
+
+            extracted_p = dest_path / name
+            if not extracted_p.is_dir():
+                expected_size = zipf.getinfo(name).file_size
+                actual_size = extracted_p.stat().st_size
+                if actual_size != expected_size:
+                    raise ComplianceError(
+                        f"Lossless restoration failed: size mismatch for '{name}'. "
+                        f"Expected {expected_size} bytes, got {actual_size} bytes."
+                    )
 
     # State Transition Reversibility Check (Virtual State Verification)
     # n represents starting state, dP_0 represents the incremental packet added.
@@ -330,8 +343,9 @@ def unpack_commercial_package(
         raise ComplianceError("State transition reversibility verification failed!")
 
     logger.info(
-        f"[Compliance Verified] State[n] ({state_n}) + δP₀ ({dp_0:.2f}) "
-        f"-> State[n+1] ({state_n_plus_1:.2f}) -> Reverted State ({reverted_state:.2f}) matches perfectly."
+        f"[Compliance Verified] Lossless unpacking complete: verified {len(extracted_files)} files. "
+        f"State[n] ({state_n}) + δP₀ ({dp_0:.2f}) -> State[n+1] ({state_n_plus_1:.2f}) -> "
+        f"Reverted State ({reverted_state:.2f}) matches perfectly."
     )
 
     return manifest, extracted_files
