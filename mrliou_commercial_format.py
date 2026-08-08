@@ -241,8 +241,10 @@ def pack_commercial_package(
         # Write each other file
         for rel_path, content in file_contents.items():
             if rel_path in ("manifest.json", "meta.json"):
-                # Ensure no conflicting manifest names are packed
-                continue
+                raise ComplianceError(
+                    f"Conflicting reserved file '{rel_path}' found in file_contents. "
+                    "The manifest is automatically managed and should not be included in file_contents."
+                )
             if isinstance(content, str):
                 zipf.writestr(rel_path, content.encode("utf-8"))
             else:
@@ -287,6 +289,13 @@ def unpack_commercial_package(
     dest_path.mkdir(parents=True, exist_ok=True)
 
     with zipfile.ZipFile(pkg_p, "r") as zipf:
+        # Check ZIP container CRC32 integrity
+        bad_file = zipf.testzip()
+        if bad_file is not None:
+            raise ComplianceError(
+                f"Container integrity check failed! File '{bad_file}' is corrupted."
+            )
+
         namelist = zipf.namelist()
         if "manifest.json" not in namelist and "meta.json" not in namelist:
             raise ImmutableSignatureError(

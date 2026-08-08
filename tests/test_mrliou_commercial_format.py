@@ -5,6 +5,7 @@ import pytest
 
 from mrliou_commercial_format import (
     CommercialNamingError,
+    ComplianceError,
     ImmutableSignatureError,
     calculate_state_transition,
     get_layer_info,
@@ -210,3 +211,23 @@ def test_unpack_missing_manifest():
             ImmutableSignatureError, match="Neither manifest.json nor meta.json found"
         ):
             unpack_commercial_package(str(package_file), str(extract_dir))
+
+
+def test_pack_reserved_filenames_raises_error():
+    """Tests that packing with manifest.json or meta.json in file_contents raises ComplianceError."""
+    manifest = {
+        "format": "flpkg/1.0",
+        "origin_signature": "MrLiouWord",
+        "philosophy": "怎麼過去，就怎麼回來",
+        "created_at": "2026-08-08T10:31:15Z",
+        "encryption_enabled": True,
+        "layer_gravity": "L0-L7",
+    }
+    file_contents = {"manifest.json": "{}"}
+
+    with tempfile.TemporaryDirectory() as tmp_dir:
+        tmp_path = Path(tmp_dir)
+        package_file = tmp_path / "Mr.liou.TotalCore.Unity.v1.flpkg"
+
+        with pytest.raises(ComplianceError, match="Conflicting reserved file"):
+            pack_commercial_package(str(package_file), manifest, file_contents)
