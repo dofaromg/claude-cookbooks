@@ -887,3 +887,12 @@
   - RAG & Retrieval
   - Integrations
   - Tools
+- title: MrLiouWord Commercial Format & Product Definition Naming
+  description: Implement the strict L0-L7 commercial format and product definition naming validation, packing, and unpacking for the MrLiouWord Particle System.
+  path: skills/notebooks/mrliou_commercial_format.ipynb
+  authors:
+  - dofaromg
+  date: '2026-08-08'
+  categories:
+  - Skills
+  - Tools
